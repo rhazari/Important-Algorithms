@@ -1,5 +1,5 @@
-
-
+//Program to find the in-order successor and predecessor 
+//of a node with a given value
 #include <iostream>
 #include <cstdlib>
 
