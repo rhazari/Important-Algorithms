@@ -1,3 +1,4 @@
+//Program to check if a binary tree is balanced or not
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
