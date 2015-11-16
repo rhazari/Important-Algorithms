@@ -41,6 +41,24 @@ void removeDuplicates(struct node **head) {
 	}
 }
 
+struct node* uniqueElements(struct node *head) {
+	node *newHead = new node;
+	newHead->next = head;
+	node *ptr = newHead;
+	while( NULL != ptr->next && NULL != ptr->next->next ){
+		if( ptr->next->data == ptr->next->next->data ) {
+			int duplicate = ptr->next->data;
+			while( NULL != ptr->next && duplicate == ptr->next->data ) {
+				ptr->next = ptr->next->next;
+			}
+		}
+		else {
+			ptr = ptr->next;
+		}
+	}
+	return newHead->next;
+}
+
 int main(){
 	node *h1 = NULL;
 	push(&h1,9);
@@ -59,6 +77,10 @@ int main(){
 
 	cout<<"Original Link List"<<endl;
 	printList(h1);
+
+	node *temp = uniqueElements(h1);
+	cout<<"The unique elements of the link list"<<endl; 
+	printList(temp);
 
 	cout<<"Link List after removing duplicates"<<endl;
 	removeDuplicates(&h1);
