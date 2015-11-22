@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -71,6 +72,30 @@ void iterativeInorder(struct Tree* root) {
 	}
 }
 
+void levelOrder(struct Tree* root) {
+	queue<Tree*> current;
+	queue<Tree*> next;
+
+	current.push(root);
+
+	Tree* temp;
+	while(!current.empty()) {
+		temp = current.front();
+		if( NULL != temp->left ){
+			next.push(temp->left);
+		}
+		if( NULL != temp->right){
+			next.push(temp->right);
+		}
+		cout<<temp->data<<"\t";
+		current.pop();
+
+		if(current.empty()){
+			swap(current,next);
+		}
+	} 
+}
+
 int main() {
 	Tree *root = NULL;
 	insert(&root, 17);
@@ -85,9 +110,16 @@ int main() {
 	cout<<"Iterative Pre Order Traversal of BST"<<endl;
 	iterativePreorder(root);
 	cout<<endl;
+	cout<<endl;
 
 	cout<<"Iterative In Order Traversal of BST"<<endl;
 	iterativeInorder(root);
+	cout<<endl;
+	cout<<endl;
+
+	cout<<"Iterative Level Order Traversal of BST"<<endl;
+	levelOrder(root);
+	cout<<endl;
 	cout<<endl;
 
 	return 0;
