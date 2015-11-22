@@ -8,8 +8,7 @@ typedef struct Tree {
 	int data;
 	struct Tree *left;
 	struct Tree *right;
-} 
-Tree;
+} Tree;
 
 void insert(struct Tree **root, int value) {
 	if ( NULL == (*root) ){
@@ -48,6 +47,30 @@ void iterativePreorder(struct Tree* root){
 	}
 }
 
+void iterativeInorder(struct Tree* root) {
+	stack<Tree*> treeStack;
+	if(NULL == root){
+		return;
+	}
+
+	Tree* p = root;
+	Tree* temp;
+
+	while( !treeStack.empty() || NULL != p ){
+		if(NULL != p){
+			treeStack.push(p);
+			p = p->left;
+		}
+		else {
+			temp = treeStack.top();
+			treeStack.pop();
+			cout<<temp->data<<"\t";
+			p = temp->right;
+		}	
+
+	}
+}
+
 int main() {
 	Tree *root = NULL;
 	insert(&root, 17);
@@ -61,6 +84,10 @@ int main() {
 
 	cout<<"Iterative Pre Order Traversal of BST"<<endl;
 	iterativePreorder(root);
+	cout<<endl;
+
+	cout<<"Iterative In Order Traversal of BST"<<endl;
+	iterativeInorder(root);
 	cout<<endl;
 
 	return 0;
