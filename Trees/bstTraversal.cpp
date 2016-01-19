@@ -1,3 +1,10 @@
+/* The different types of traversals of a Binary Tree 
+	1. Iterative Pre-order Traversal
+	2. Iterative In-order Traversal
+	3. Level Order Traversal
+	4. Level Order bottom-up traversal
+*/
+
 #include <iostream>
 #include <cstdlib>
 #include <stack>
@@ -96,6 +103,32 @@ void levelOrder(struct Tree* root) {
 	} 
 }
 
+stack<int> levelOrderBottomUp(struct Tree* root){
+	queue<Tree*> current;
+	queue<Tree*> next;
+	stack<int> revLevel;
+
+	current.push(root);
+	while(!current.empty()) {
+		Tree* temp = current.front();
+		revLevel.push(temp->data);
+
+		if( NULL != temp->left ){
+			next.push(temp->left);
+		}
+		if( NULL != temp->right){
+			next.push(temp->right);
+		}
+
+		current.pop();
+		if(current.empty()){
+			revLevel.push('#');
+			swap(current,next);	
+		}
+	}
+	return revLevel;
+}
+
 int main() {
 	Tree *root = NULL;
 	insert(&root, 17);
@@ -120,6 +153,20 @@ int main() {
 	cout<<"Iterative Level Order Traversal of BST"<<endl;
 	levelOrder(root);
 	cout<<endl;
+	cout<<endl;
+	stack<int> myStack = levelOrderBottomUp(root);
+	cout<<"Iterative Level Order Traversal bottom up"<<endl;
+	myStack.pop();
+	while(!myStack.empty()){
+		if('#' ==  myStack.top()){
+			cout<<"#\t";
+		}
+		else {
+			cout<<myStack.top()<<" ";
+		}
+		myStack.pop();
+
+	}
 	cout<<endl;
 
 	return 0;
