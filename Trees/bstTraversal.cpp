@@ -79,6 +79,34 @@ void iterativeInorder(struct Tree* root) {
 	}
 }
 
+void iterativePostOrder(Tree* root){
+	stack<Tree*> treeStack;
+	if(NULL == root){
+		return;
+	}
+
+	Tree *ptr, *temp;
+	ptr = root;
+	treeStack.push(ptr);
+	while(!treeStack.empty()){
+		temp = treeStack.top();
+		if(NULL == temp->left && NULL == temp->right){
+			treeStack.pop();
+			cout<<temp->data<<"\t";
+		}
+		else{
+			if(NULL != temp->right){
+				treeStack.push(temp->right);
+				temp->right = NULL;
+			}
+			if(NULL != temp->left){
+				treeStack.push(temp->left);
+				temp->left = NULL;
+			}
+		}
+	}
+}
+
 void levelOrder(struct Tree* root) {
 	queue<Tree*> current;
 	queue<Tree*> next;
@@ -167,6 +195,11 @@ int main() {
 		myStack.pop();
 
 	}
+	cout<<endl;
+	cout<<endl;
+	cout<<"Iterative Post Order Traversal of BST"<<endl;
+	iterativePostOrder(root);
+	cout<<endl;
 	cout<<endl;
 
 	return 0;
