@@ -7,6 +7,14 @@ using namespace std;
 
 typedef pair<char,int> P;
 
+struct Order
+{
+    bool operator()(P const& a, P const& b) const
+    {
+        return a.second < b.second || a.second == b.second && a.first < b.first;
+    }
+};
+
 int main(){
 
 	char arr[] = {'a','b','c','d','a','d','a','f','g','h','a','b','c','a','r','t','x','c','d'};
@@ -18,7 +26,7 @@ int main(){
 		um[arr[k]] += 1;
 	}
 
-	priority_queue< P, vector<P>, greater<P> > pq;
+	priority_queue< P, vector<P>, Order > pq;
 	//priority_queue<P> pq;
 	for(auto ii = um.begin(); ii != um.end(); ++ii){
 		pq.push(make_pair( (*ii).first, (*ii).second));
