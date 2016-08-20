@@ -21,7 +21,6 @@ void permutate(string &str, int left, int right){
 			swap(str,left,k);
 		}
 	}
-
 }
 
 int main(){

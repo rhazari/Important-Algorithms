@@ -18,6 +18,5 @@ int main(){
 		}
 		cout<<endl;
 	}
-	//cout<<num<<endl;
 	return 0;
 }
