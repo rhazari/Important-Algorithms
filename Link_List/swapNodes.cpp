@@ -11,51 +11,37 @@ typedef struct node {
 
 
 void push(struct node** ptr, int val) {
-	node* newptr = (node*)malloc(sizeof(node));
+	node* newptr = new node;
 	newptr->data = val;
 	newptr->next = (*ptr);
 	(*ptr) = newptr;
 }
 
 void printList(struct node* ptr) {
-	while(ptr != NULL) {
-		printf("%d ",ptr->data);
+	while(ptr) {
+		cout<<ptr->data<<" ";
 		ptr = ptr->next;
 	}
-	printf("\n");
+	cout<<endl;
 }
 
-struct node* swapNodes(struct node *head) {
-	if( NULL == head && NULL == head->next ){
-		return head;
-	}
-	struct node *newHead = new node;
-	newHead->next = head;
-	node *ptr = newHead;
-	node *p1, *p2, *tmp;
-	tmp = head;
-	while( NULL != head->next && NULL != head->next->next){
-		p1 = head;
-		p2 = head->next;
-		tmp = head->next->next;
+node *swapNodes(node *head){
+	node *fakeHead = new node;
+	fakeHead->next = head;
+	node *ptr = fakeHead;
+	while(ptr->next != NULL && ptr->next->next != NULL){
+		node *p1 = ptr->next;
+		node *p2 = ptr->next->next;
 
+		//Assignments
 		ptr->next = p2;
-		ptr = ptr->next;
-		ptr->next = p1;
-		ptr = ptr->next;
+		p1->next = p2->next;
+		p2->next = p1;
 
-		head = tmp;
+		//Move to next pair
+		ptr = p1;
 	}
-	if( NULL == head->next ){
-		ptr->next = head;
-	}
-	else if (NULL == head->next->next ){
-		ptr->next = head->next;
-		ptr = ptr->next;
-		ptr->next = head;
-		ptr->next->next = NULL;
-	}
-	return newHead->next;
+	return fakeHead->next;
 }
 
 int main () {
@@ -71,6 +57,5 @@ int main () {
 	cout<<"\nLink List after swapping nodes"<<endl;
 	node *temp = swapNodes(head);
 	printList(temp);
-
 	return 0;
 }
