@@ -39,7 +39,7 @@ class new_ds
     void checkin(int value)
     {
         v.push_back(value);
-        push_heap(v.begin(),v.end(),less<int>());
+        make_heap(v.begin(),v.end(),less<int>());
     }
 };
 
@@ -50,4 +50,9 @@ int main()
     cout << D1.checkout() << endl;
     cout << D1.checkout() << endl;
     cout << D1.checkout() << endl;
+    D1.checkin(1);
+    D1.checkin(2);
+    D1.checkin(3);
+    cout << D1.checkout()<< endl;
+    cout << D1.checkout()<< endl;
 }
