@@ -5,81 +5,67 @@
 
 using namespace std;
 
-typedef struct node{
+class Node{
+public:
     int value;
-    struct node* left;
-    struct node* right;
-}node;
-
-node* root = NULL;
-
-int contains(int num)
-{
-    node* index = root;
-    
-    if(index == NULL)
-    {
-        return 0;
+    Node* left;
+    Node* right;
+    Node(int _val){
+        value = _val;
+        left = nullptr;
+        right = nullptr;
     }
+};
+
+Node* root = nullptr;
+
+int contains(int num){
+    Node* index = root;
+    if(!index)
+        return 0;
     
-    while(index != NULL)
-    {
-        if(index->value ==  num)
-        {
+    while(index){
+        if(index->value ==  num){
             return 1;
         }
-        else if(index->value > num)
-        {
+        else if(index->value > num){
             index = index->left;
         }
-        else if(index->value < num)
-        {
+        else if(index->value < num){
             index = index->right;
         }
     }
     return 0;    
 }
 
-int insert(int num)
-{
-    node* ptr = (node*)malloc(sizeof(node));
-    ptr->value = num;
-    ptr->left = NULL;
-    ptr->right = NULL;
+int insert(int num){
+    Node* ptr = new Node(num);
     
-    node* index = root;
-    node* prev = NULL;
+    Node* index = root;
+    Node* prev = nullptr;
     
-    if(contains(num))
-    {
+    if(contains(num)){
         cout<< num<<" already exits in the tree\n";
         return 0;
     }
-    else
-    {
-        while(index != NULL)
-        {
-            if(index->value > num)
-            {
+    else{
+        while(index){
+            if(index->value > num){
                 prev = index;
                 index = index->left;
             }
-            else
-            {
+            else{
                 prev = index;
                 index = index->right;
             }
         }
     }    
-    if(index == NULL)
-    {
-        if(prev->value > num)
-        {
+    if(!index){
+        if(prev->value > num){
             prev->left = ptr;
             return 1;
         }
-        else
-        {
+        else{
             prev->right = ptr;
             return 1;
         }   
@@ -87,104 +73,73 @@ int insert(int num)
     return 0;
 }
 
-void inorder(node* ptr)
-{
-    if(ptr != NULL)
-    {
+void inorder(Node* ptr){
+    if(ptr){
         inorder(ptr->left);
         cout<<ptr->value<<" ";
         inorder(ptr->right);
     }
 }
 
-void predecessor(struct node* ptr, struct node** pred, int val)
-{
+void predecessor(Node* ptr, Node** pred, int val){
 	(*pred) = ptr;
-	if(ptr->value == val)
-	{
-		if(ptr->left != NULL)
-		{
+	if(ptr->value == val){
+		if(ptr->left){
 			ptr = ptr->left;
 			while(ptr->right)
-			{
 				ptr = ptr->right;
-			}
 			(*pred) = ptr;
 		}
 	}
-	else if(ptr->value > val)
-	{
-		if(ptr->left != NULL)
-		{
+	else if(ptr->value > val){
+		if(ptr->left)
 			predecessor(ptr->left, pred, val);
-		}
 	}
-	else if(ptr->value < val)
-	{
-		if(ptr->right != NULL && ptr->right->value < val)
-		{
-			predecessor(ptr->right, pred, val);	
-		}
-	}	
+	else if(ptr->value < val){
+		if(ptr->right && ptr->right->value < val)
+			predecessor(ptr->right, pred, val);
+	}
 }
 
-void successor(struct node* ptr, struct node** pred, int val)
-{
+void successor(Node* ptr, Node** pred, int val){
 	(*pred) = ptr;
-	if(ptr->value == val)
-	{
-		if(ptr->right != NULL)
-		{
+	if(ptr->value == val){
+		if(ptr->right){
 			ptr = ptr->right;
 			while(ptr->left)
-			{
 				ptr = ptr->left;
-			}
 			(*pred) = ptr;
 		}
 	}
-	else if(ptr->value > val)
-	{
-		if(ptr->left != NULL && ptr->left->value > val)
-		{
+	else if(ptr->value > val){
+		if(ptr->left && ptr->left->value > val)
 			successor(ptr->left, pred, val);
-		}
 	}
-	else if(ptr->value < val)
-	{
-		if(ptr->right != NULL)
-		{
-			successor(ptr->right, pred, val);	
-		}
-	}	
+	else if(ptr->value < val){
+		if(ptr->right)
+			successor(ptr->right, pred, val);
+	}
 }
 
-int main()
-{ 
-    root = (node*)malloc(sizeof(node));
-    root->value = 13;
-    root->left = NULL;
-    root->right = NULL;
+int main(){ 
+    root = new Node(13);
     
     int read = 6;
     int x;
-    while(read)
-    {
+    while(read){
         cout<<"Enter a value into the BST\n";
         cin >> x;
         
         if(insert(x))
-        {
             read--;
-        }
     }
     
     cout<<"Inorder BST traversal\n";
     inorder(root);
     cout<<"\n";
 
-	 node* pred = NULL;
-	 node* succ = NULL;	
+	 Node* pred = nullptr;
+	 Node* succ = nullptr;	
 	 int num;	
 	 cout<<"Enter a value whose predecessor & successor needs to be found"<<endl;
 	 cin >> num;		
