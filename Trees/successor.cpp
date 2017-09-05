@@ -2,18 +2,21 @@
 
 using namespace std;
 
-typedef struct tree{
+class tree{
+public:
 	int data;
-	struct tree* left;
-	struct tree* right;
-}tree;
+	tree* left;
+	tree* right;
+	tree(int _data){
+		data = _data;
+		left = nullptr;
+		right = nullptr;
+	}
+};
 
 void createBST(tree **root, int val){
-	if(NULL == (*root)){
-		tree* t = new tree;
-		t->data = val;
-		t->left = NULL;
-		t->right = NULL;
+	if(!(*root)){
+		tree* t = new tree(val);
 		(*root) = t;
 	}
 	else if( (*root)->data < val ){
@@ -33,7 +36,7 @@ void inorderT(tree *root){
 }
 
 tree* successor(tree *root, tree *p){
-	tree *sc = NULL;
+	tree *sc = nullptr;
 	cout<<"Root: "<<root->data<<endl;
 	cout<<"Node: "<<p->data<<endl;
 	if(p->right){
@@ -44,10 +47,9 @@ tree* successor(tree *root, tree *p){
 		sc = p;
 	}
 	else{
-		while(NULL != root){
-			if(root->data < p->data){
+		while(root){
+			if(root->data < p->data)
 				root = root->right;
-			}
 			else if(root->data > p->data){
 				sc = root;
 				root = root->left;
@@ -61,7 +63,7 @@ tree* successor(tree *root, tree *p){
 
 int main(){
 
-	tree *root = NULL;
+	tree *root = nullptr;
 	createBST(&root,17);
 	createBST(&root,11);
 	createBST(&root,13);
