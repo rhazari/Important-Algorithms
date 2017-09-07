@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-void helper(vector<int>& vec, vector<vector<int>>& result, vector<int>& temp, int start, int target){
+void helper(vector<vector<int>>& result, vector<int>& temp, vector<int>& vec, int target, int start){
 	if(0 == target){
 		result.push_back(temp);
 		return;
@@ -11,22 +12,25 @@ void helper(vector<int>& vec, vector<vector<int>>& result, vector<int>& temp, in
 	for(int k = start; k < vec.size(); ++k){
 		if(vec[k] > target)
 			return;
+		if(k > start && vec[k] == vec[k-1])
+			continue;
 		temp.push_back(vec[k]);
-		helper(vec, result, temp, k, target - vec[k]);
+		helper(result, temp, vec, target - vec[k], k+1);
 		temp.pop_back();
 	}
 }
 
 int main(){
-	vector<int> vec = {2,3,6,7};
+	vector<int> vec = {10, 1, 2, 7, 6, 1, 5};
+	sort(vec.begin(), vec.end());
 	vector<vector<int>> result;
 	vector<int> temp;
-	helper(vec, result, temp, 0, 7);
+	helper(result, temp, vec, 8, 0);
 
 	for(const auto& v: result){
 		for(const auto& elem: v)
 			cout<<elem<<" ";
-		cout<<endl;
+		cout<<"\n";
 	}
 	return 0;
 }
