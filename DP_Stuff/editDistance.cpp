@@ -28,7 +28,6 @@ void computeDistance(string s1, string s2){
 		}
 	}
 	cout<<"Min edits needed to covert "<<s1<<"->"<<s2<<": "<<vec[sz1][sz2]<<endl;
-
 }
 
 int main(){
