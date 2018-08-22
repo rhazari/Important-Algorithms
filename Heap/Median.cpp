@@ -3,6 +3,8 @@
 
 using namespace std;
 
+/* Running Median from a data stream */
+
 int main(){
     priority_queue<int> max_heap;
     priority_queue<int, vector<int>, greater<int> > min_heap;
@@ -32,13 +34,13 @@ int main(){
             min_heap.pop();
         }
         if(min_heap.size() == max_heap.size()){
-            cout<<(float)(min_heap.top()+max_heap.top())/2.0<<"";
+            cout<<(float)(min_heap.top()+max_heap.top())/2.0<<" ";
         }
         else if(min_heap.size() > max_heap.size()){
-            cout<<min_heap.top()<<"";
+            cout<<min_heap.top()<<" ";
         }
         else{
-            cout<<max_heap.top()<<"";
+            cout<<max_heap.top()<<" ";
         }
     }
     cout<<endl;

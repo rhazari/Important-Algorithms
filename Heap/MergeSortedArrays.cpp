@@ -6,9 +6,9 @@ using namespace std;
 
 vector<int> mergeSortedArray(vector<vector<int> >& vec){
     priority_queue<int, vector<int>, greater<int> > min_heap;
-    for(auto ii = vec.begin(); ii != vec.end(); ++ii){
-        for(auto jj = (*ii).begin(); jj != (*ii).end(); ++jj){
-            min_heap.push(*jj);
+    for(const auto& v: vec){
+        for(const auto& elem: v){
+            min_heap.push(elem);
         }
     }
     vector<int> result;
@@ -30,9 +30,9 @@ int main(){
     vec.push_back(v2);
     vec.push_back(v3);
     final = mergeSortedArray(vec);
-    for(auto tt = final.begin(); tt != final.end(); ++tt){
-        cout<<*tt<<"";
-    }
+    
+    for(const auto& elem: final)
+        cout<<elem<<" ";
     cout<<endl;
 
     return 0;
