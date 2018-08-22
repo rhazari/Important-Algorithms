@@ -26,7 +26,7 @@ void displayTree(tree *root){
     if(root->left){
         displayTree(root->left);
     }
-    cout<<root->data<<"\t";
+    cout<<root->data<<"";
     if(root->right){
         displayTree(root->right);
     }
@@ -65,7 +65,7 @@ int main(){
     cout<<"All Paths from Root to Leaves..."<<endl;
     for(auto ii = allPaths.begin(); ii != allPaths.end(); ++ii){
         for(auto jj = (*ii).begin(); jj != (*ii).end(); ++jj){
-            cout<<*jj<<"\t";
+            cout<<*jj<<"";
         }
         cout<<endl;
     }

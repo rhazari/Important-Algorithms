@@ -15,26 +15,26 @@ If there is no valid move, return an empty list []
 
 using namespace std;
 vector<string> generateNextMoves(string s){
-	vector<string> result;
-	if("" == s || s.size() < 2)
-		return result;
+    vector<string> result;
+    if("" == s || s.size() < 2)
+        return result;
 
-	for(int k = 0, len = s.size(); k < len; ++k){
-		if(s[k] == s[k+1] && s[k] == '+'){
-			s[k] = '-';
-			s[k+1] = '-';
-			result.push_back(s);
-			s[k] = '+';
-			s[k+1] = '+';
-		}
-	}
-	return result;
+    for(int k = 0, len = s.size(); k < len; ++k){
+        if(s[k] == s[k+1] && s[k] == '+'){
+            s[k] = '-';
+            s[k+1] = '-';
+            result.push_back(s);
+            s[k] = '+';
+            s[k+1] = '+';
+        }
+    }
+    return result;
 }
 
 int main(){
 
-	auto vec = generateNextMoves("++++");
-	for(const auto& v: vec)
-		cout<<v<<endl;
-	return 0;
+    auto vec = generateNextMoves("++++");
+    for(const auto& v: vec)
+        cout<<v<<endl;
+    return 0;
 }

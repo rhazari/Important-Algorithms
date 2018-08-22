@@ -4,27 +4,27 @@
 
 typedef struct node
 {
-	int data;
-	struct node* next;
+    int data;
+    struct node* next;
 }
 node;
 
 void push(struct node** ptr, int val)
 {
-	node* newptr = (node*)malloc(sizeof(node));
-	newptr->data = val;
-	newptr->next = (*ptr);
-	(*ptr) = newptr;
+    node* newptr = (node*)malloc(sizeof(node));
+    newptr->data = val;
+    newptr->next = (*ptr);
+    (*ptr) = newptr;
 }
 
 void printList(struct node* ptr)
 {
-	while(ptr != NULL)
-	{
-		printf("%d ",ptr->data);
-		ptr = ptr->next;
-	}
-	printf("\n");
+    while(ptr != NULL)
+    {
+        printf("%d ",ptr->data);
+        ptr = ptr->next;
+    }
+    printf("\n");
 }
 
 void rotateList(struct node** ptr, int val)
@@ -52,21 +52,21 @@ void rotateList(struct node** ptr, int val)
 
 int main()
 {
-	node* head = NULL;
+    node* head = NULL;
 
-	int k = 10;
-	while(k)
-	{
-		push(&head,k);
-		k--;
-	}
-	
-	printList(head);
+    int k = 10;
+    while(k)
+    {
+        push(&head,k);
+        k--;
+    }
+    
+    printList(head);
 
-	int x = 5;
-	rotateList(&head,x);
+    int x = 5;
+    rotateList(&head,x);
 
-	printList(head);
+    printList(head);
 
-	return 0;
+    return 0;
 }

@@ -9,25 +9,25 @@
 using namespace std;
 
 int main(){
-	int length = 5;
-	vector<vector<int>> vec = { {1,  3,  2}, {2,  4,  3}, {0,  2, -2} };
-	vector<int> result, temp(length+1, 0);
-	for(const auto& a: vec){
-		temp[a[0]] += a[2];
-		temp[a[1]] -= a[2];
-	}
+    int length = 5;
+    vector<vector<int>> vec = { {1,  3,  2}, {2,  4,  3}, {0,  2, -2} };
+    vector<int> result, temp(length+1, 0);
+    for(const auto& a: vec){
+        temp[a[0]] += a[2];
+        temp[a[1]] -= a[2];
+    }
 
-	int sum = 0;
-	for(const auto& s: temp){
-		sum += s;
-		result.push_back(sum);
-	}
+    int sum = 0;
+    for(const auto& s: temp){
+        sum += s;
+        result.push_back(sum);
+    }
 
-	result.pop_back();
-	
-	for(const auto& elem: result)
-		cout<<elem<<" ";
-	cout<<endl;	
+    result.pop_back();
+    
+    for(const auto& elem: result)
+        cout<<elem<<" ";
+    cout<<endl;    
 
-	return 0;
+    return 0;
 }

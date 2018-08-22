@@ -82,43 +82,43 @@ void inorder(Node* ptr){
 }
 
 void predecessor(Node* ptr, Node** pred, int val){
-	(*pred) = ptr;
-	if(ptr->value == val){
-		if(ptr->left){
-			ptr = ptr->left;
-			while(ptr->right)
-				ptr = ptr->right;
-			(*pred) = ptr;
-		}
-	}
-	else if(ptr->value > val){
-		if(ptr->left)
-			predecessor(ptr->left, pred, val);
-	}
-	else if(ptr->value < val){
-		if(ptr->right && ptr->right->value < val)
-			predecessor(ptr->right, pred, val);
-	}
+    (*pred) = ptr;
+    if(ptr->value == val){
+        if(ptr->left){
+            ptr = ptr->left;
+            while(ptr->right)
+                ptr = ptr->right;
+            (*pred) = ptr;
+        }
+    }
+    else if(ptr->value > val){
+        if(ptr->left)
+            predecessor(ptr->left, pred, val);
+    }
+    else if(ptr->value < val){
+        if(ptr->right && ptr->right->value < val)
+            predecessor(ptr->right, pred, val);
+    }
 }
 
 void successor(Node* ptr, Node** pred, int val){
-	(*pred) = ptr;
-	if(ptr->value == val){
-		if(ptr->right){
-			ptr = ptr->right;
-			while(ptr->left)
-				ptr = ptr->left;
-			(*pred) = ptr;
-		}
-	}
-	else if(ptr->value > val){
-		if(ptr->left && ptr->left->value > val)
-			successor(ptr->left, pred, val);
-	}
-	else if(ptr->value < val){
-		if(ptr->right)
-			successor(ptr->right, pred, val);
-	}
+    (*pred) = ptr;
+    if(ptr->value == val){
+        if(ptr->right){
+            ptr = ptr->right;
+            while(ptr->left)
+                ptr = ptr->left;
+            (*pred) = ptr;
+        }
+    }
+    else if(ptr->value > val){
+        if(ptr->left && ptr->left->value > val)
+            successor(ptr->left, pred, val);
+    }
+    else if(ptr->value < val){
+        if(ptr->right)
+            successor(ptr->right, pred, val);
+    }
 }
 
 int main(){ 
@@ -138,16 +138,16 @@ int main(){
     inorder(root);
     cout<<"\n";
 
-	 Node* pred = nullptr;
-	 Node* succ = nullptr;	
-	 int num;	
-	 cout<<"Enter a value whose predecessor & successor needs to be found"<<endl;
-	 cin >> num;		
-	 predecessor(root, &pred, num);
-	 successor(root, &succ, num);
-	
-	 cout<<"Predecessor of "<<num<<": "<<pred->value<<endl;
-	 cout<<"Successor of "<<num<<": "<<succ->value<<endl;
+     Node* pred = nullptr;
+     Node* succ = nullptr;    
+     int num;    
+     cout<<"Enter a value whose predecessor & successor needs to be found"<<endl;
+     cin >> num;        
+     predecessor(root, &pred, num);
+     successor(root, &succ, num);
+    
+     cout<<"Predecessor of "<<num<<": "<<pred->value<<endl;
+     cout<<"Successor of "<<num<<": "<<succ->value<<endl;
 
     return 0;
 }

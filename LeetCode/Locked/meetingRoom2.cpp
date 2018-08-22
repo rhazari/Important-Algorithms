@@ -10,23 +10,23 @@ using namespace std;
 
 int main(){
 
-	vector<pair<int, int>> vec = {{0, 30},{5, 10},{15, 20}};
+    vector<pair<int, int>> vec = {{0, 30},{5, 10},{15, 20}};
 
-	sort(vec.begin(), vec.end(), [](pair<int, int> a, pair<int, int> b){
-		return (a.first <  b.first);
-	});
+    sort(vec.begin(), vec.end(), [](pair<int, int> a, pair<int, int> b){
+        return (a.first <  b.first);
+    });
 
-	priority_queue<int, vector<int>, greater<int>> pq;
-	pq.push(vec[0].second);
+    priority_queue<int, vector<int>, greater<int>> pq;
+    pq.push(vec[0].second);
 
-	int count = 1;
-	for(int k = 1; k < vec.size(); ++k){
-		if(pq.top() <= vec[k].first)
-			pq.pop();
-		pq.push(vec[k].second);
-		count  = max(count, (int)pq.size());
-	}
+    int count = 1;
+    for(int k = 1; k < vec.size(); ++k){
+        if(pq.top() <= vec[k].first)
+            pq.pop();
+        pq.push(vec[k].second);
+        count  = max(count, (int)pq.size());
+    }
 
-	cout<<"Maximum number of rooms needed "<<count<<"\n";
-	return 0;
+    cout<<"Maximum number of rooms needed "<<count<<"\n";
+    return 0;
 }
