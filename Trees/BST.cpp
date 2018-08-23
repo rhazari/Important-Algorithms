@@ -6,138 +6,103 @@
 
 using namespace std;
 
-typedef struct node{
-    int value;
-    struct node* left;
-    struct node* right;
-}
-node;
+struct TreeNode{
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x): val(x), left(nullptr), right(nullptr){}
+};
 
-node* root = NULL;
-
-int contains(int num)
-{
-    node* index = root;
+int contains(TreeNode* root, int num) {
+    TreeNode* ptr = root;
     
-    if(index == NULL)
-    {
-        return 0;
+    if(nullptr == ptr) {
+        return false;
     }
     
-    while(index != NULL)
-    {
-        if(index->value ==  num)
-        {
-            return 1;
+    while(nullptr != ptr){
+        if(ptr->val ==  num) {
+            return true;
         }
-        else if(index->value > num)
-        {
-            index = index->left;
+        else if(ptr->val > num) {
+            ptr = ptr->left;
         }
-        else if(index->value < num)
-        {
-            index = index->right;
+        else if(ptr->val < num) {
+            ptr = ptr->right;
         }
     }
-    return 0;
-    
+    return false;
 }
 
-int insert(int num)
-{
-    node* ptr = (node*)malloc(sizeof(node));
-    ptr->value = num;
-    ptr->left = NULL;
-    ptr->right = NULL;
+bool insert(TreeNode* root, int num) {
+    TreeNode* ptr = new TreeNode(num);
     
-    node* index = root;
-    node* prev = NULL;
+    TreeNode* curr = root;
+    TreeNode* prev = NULL;
     
-    if(contains(num))
-    {
+    if(contains(root, num)) {
         cout<< num<<" already exits in the tree\n";
-        return 0;
+        return false;
     }
-    else
-    {
-        while(index != NULL)
-        {
-            if(index->value > num)
-            {
-                prev = index;
-                index = index->left;
+    else {
+        while(nullptr != curr) {
+            if(curr->val > num) {
+                prev = curr;
+                curr = curr->left;
             }
-            else
-            {
-                prev = index;
-                index = index->right;
+            else {
+                prev = curr;
+                curr = curr->right;
             }
         }
     }
     
-    if(index == NULL)
-    {
-        if(prev->value > num)
-        {
+    if(nullptr == curr) {
+        if(prev->val > num) {
             prev->left = ptr;
-            return 1;
+            return true;
         }
-        else
-        {
+        else {
             prev->right = ptr;
-            return 1;
+            return true;
         }   
     }
-    return 0;
+    return false;
 }
 
-void inorder(node* ptr)
-{
-    if(ptr != NULL)
-    {
+void inorder(TreeNode* ptr) {
+    if(nullptr != ptr) {
         inorder(ptr->left);
-        cout<<ptr->value<<" ";
+        cout<<ptr->val<<" ";
         inorder(ptr->right);
     }
 }
 
-void preorder(node* ptr)
-{
-    if(ptr != NULL)
-    {
-        cout << ptr->value<<" ";
+void preorder(TreeNode* ptr) {
+    if(nullptr != ptr) {
+        cout << ptr->val<<" ";
         preorder(ptr->left);
         preorder(ptr->right);
     }
 }
 
-void postorder(node* ptr)
-{
-    if(ptr != NULL)
-    {
+void postorder(TreeNode* ptr) {
+    if(nullptr != ptr) {
         postorder(ptr->left);
         postorder(ptr->right);
-        cout << ptr->value <<" "; 
+        cout << ptr->val <<" "; 
     }
 }
 
-int main()
-{
-    
-    root = (node*)malloc(sizeof(node));
-    root->value = 13;
-    root->left = NULL;
-    root->right = NULL;
-    
+int main() {
+
+    TreeNode* root = new TreeNode(13);
     int read = 5;
     int x;
-    while(read)
-    {
+    while(read) {
         cout<<"Enter a value into the BST\n";
         cin >> x;
-        
-        if(insert(x))
-        {
+        if(insert(root, x)){
             read--;
         }
     }
