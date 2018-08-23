@@ -2,7 +2,6 @@
 //Also outputs the in-order, pre-order & post-order traversal of the BST
 
 #include <iostream>
-#include <cstdlib>
 
 using namespace std;
 

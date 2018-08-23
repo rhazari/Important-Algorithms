@@ -1,91 +1,88 @@
 #include <iostream>
-#include <cstdlib>
 #include <queue>
 
 using namespace std;
 
-typedef struct Tree {
-    int data;
-    struct Tree *left;
-    struct Tree *right;
-} Tree;
+struct TreeNode{
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x): val(x), left(nullptr), right(nullptr){}
+};
 
-void insert(struct Tree **root, int value) {
-    if ( NULL == (*root) ){
-        Tree *temp = new Tree;
-        temp->data = value;
-        temp->left = NULL;
-        temp->right = NULL;
+
+void insert(TreeNode **root, int value) {
+    if ( nullptr == (*root) ){
+        TreeNode *temp = new TreeNode(value);
         (*root) = temp;
     }
     else {
-        if( (*root)->data > value ) {
+        if( (*root)->val > value ) {
             insert(&((*root)->left), value);
         }
-        else if ( (*root)->data < value ) {
+        else if ( (*root)->val < value ) {
             insert(&((*root)->right), value);
         }
     }
 }
 
-int maxHeight(struct Tree* root) {
-    if(NULL == root){
+int maxHeight(TreeNode* root) {
+    if(nullptr == root){
         return 0;
     }
 
-    int left = 1+maxHeight(root->left);
-    int right = 1+maxHeight(root->right);
+    int left = maxHeight(root->left);
+    int right = maxHeight(root->right);
 
-    return (left < right) ? right:left;
+    return 1+max(left, right);
 }
 
-int minHeight(struct Tree* root){
-    if(NULL == root) {
+int minHeight(TreeNode* root){
+    if(nullptr == root) {
         return 0;
     }
-    int left = 1+minHeight(root->left);
-    int right = 1+minHeight(root->right);
+    int left = minHeight(root->left);
+    int right = minHeight(root->right);
 
-    if(NULL == root->left){
+    if(nullptr == root->left){
         return right;
     }
 
-    if(NULL == root->right){
+    if(nullptr == root->right){
         return left;
     }
 
-    return (left < right) ? left: right;
+    return 1+min(left, right);
 }
 
-int minDepth(struct Tree* root){
-    queue<Tree*> treeQ;
+int minDepth(TreeNode* root){
+    queue<TreeNode*> treeQ;
     queue<int> depth;
 
-    if(NULL == root){
+    if(nullptr == root){
         return 0;
     }
 
     treeQ.push(root);
     depth.push(1);
-    Tree* temp;
     int minDepth;
     while( !treeQ.empty() ){
-        temp = treeQ.front();
+        auto* temp = treeQ.front();
         treeQ.pop();
         minDepth = depth.front();
         depth.pop();
 
-        if(NULL != temp->left){
+        if(nullptr != temp->left){
             treeQ.push(temp->left);
             depth.push(1+minDepth);
         }
 
-        if(NULL != temp->right){
+        if(nullptr != temp->right){
             treeQ.push(temp->right);
             depth.push(1+minDepth);
         }
 
-        if (NULL == temp->left && NULL == temp->right){
+        if (nullptr == temp->left && nullptr == temp->right){
             return minDepth;
         }
     }
@@ -93,7 +90,7 @@ int minDepth(struct Tree* root){
 }
 
 int main() {
-    Tree *root = NULL;
+    TreeNode *root = nullptr;
     insert(&root, 17);
     insert(&root, 9);
     insert(&root, 23);
