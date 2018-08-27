@@ -11,11 +11,11 @@ public:
 };
 
 void inOrder(TreeNode *root ) {
-    if( root ){
-        inOrder(root->left);
-        cout<<root->val<<" ";
-        inOrder(root->right);
-    }
+    if(!root)
+        return;
+    inOrder(root->left);
+    cout<<root->val<<" ";
+    inOrder(root->right);
 }
 
 void insert(TreeNode **root, int value) {

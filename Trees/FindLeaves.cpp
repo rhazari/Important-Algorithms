@@ -58,7 +58,7 @@ vector<vector<int>> findLeaves(TreeNode* root){
 
 int main(){
 
-    TreeNode *tree;
+    TreeNode *tree = nullptr;
     createBST(&tree, 6);
     createBST(&tree, 11);
     createBST(&tree, 7);
