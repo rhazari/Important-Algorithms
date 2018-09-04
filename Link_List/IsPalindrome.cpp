@@ -2,30 +2,31 @@
 
 using namespace std;
 
-typedef struct node{
+class ListNode{
+public:
     int data;
-    struct node *next;
-}node;
+    ListNode *next;
+    ListNode(int val): data(val), next(nullptr){}
+};
 
-void push(node **head, int value){
-    node *p = new node;
-    p->data = value;
-    p->next = *head;
-    *head = p;
+void push(ListNode **head, int value){
+    ListNode *ptr = new ListNode(value);
+    ptr->next = *head;
+    *head = ptr;
 }
 
-void display(node *head){
-    while(head){
-        cout<<head->data<<" ";
-        head = head->next;
+void display(ListNode *root){
+    while(root){
+        cout<<root->data<<" ";
+        root = root->next;
     }
-    cout<<endl;
+    cout<<"\n";
 }
 
-void reverseList(node **root){
-    node *ptr, *prev, *temp;
+void reverseList(ListNode **root){
+    ListNode *ptr, *prev, *temp;
     ptr = *root;
-    prev = NULL;
+    prev = nullptr;
     while(ptr){
         temp = ptr->next;
         ptr->next = prev;
@@ -35,18 +36,16 @@ void reverseList(node **root){
     *root = prev;
 }
 
-bool checkPalindrome(node *head){
-    node *slow, *fast;
-    slow = fast = head;
-    while(fast != NULL && fast->next != NULL){
+bool checkPalindrome(ListNode *root){
+    ListNode *slow, *fast;
+    slow = fast = root;
+    while(fast && fast->next && fast->next->next){
         slow = slow->next;
         fast = fast->next->next;
     }
-    if(fast){
-        slow = slow->next;
-    }
+    slow = slow->next;
     reverseList(&slow);
-    fast = head;
+    fast = root;
     while(slow){
         if(fast->data != slow->data){
             return false;
@@ -58,7 +57,7 @@ bool checkPalindrome(node *head){
 }
 
 int main(){
-    node *head = NULL;
+    ListNode *head = nullptr;
     push(&head,5);
     push(&head,7);
     push(&head,9);
@@ -75,6 +74,5 @@ int main(){
     else{
         cout<<"Not a palindrome"<<endl;
     }
-
     return 0;
 }
