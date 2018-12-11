@@ -21,11 +21,9 @@ bool dfs(unordered_map<int, vector<int>>& g,
         recStack[u] = true;
 
         for(auto v: g[u]){
-            if(!visited[v] && dfs(g, visited, recStack, v)){
+            if(recStack[v] || dfs(g, visited, recStack, v)){
                 return true;
             }
-            else if(recStack[v])
-                return true;
         }
     }
     recStack[u] = false;
@@ -37,7 +35,7 @@ bool hasCycle(unordered_map<int, vector<int>>& g, int V){
     vector<bool> recStack(V, false);
 
     for(int k = 0; k < V; ++k){
-        if(dfs(g, visited, recStack, k))
+        if(!visited[k] && dfs(g, visited, recStack, k))
             return true;
     }
     return false;
