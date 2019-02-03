@@ -5,7 +5,7 @@ using namespace std;
 ListNode *revList(ListNode *head){
     ListNode *prev, *ptr, *temp;
     ptr = head;
-    prev = NULL;
+    prev = nullptr;
     while(ptr){
         temp = ptr->next;
         ptr->next = prev;
@@ -34,7 +34,7 @@ ListNode *delListNode(ListNode *head, int value){
 }
 
 int main(){
-    ListNode *head = NULL;
+    ListNode *head = nullptr;
     push(&head,12);
     push(&head,17);
     push(&head,9);

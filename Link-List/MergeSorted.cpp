@@ -1,33 +1,13 @@
-#include <iostream>
+#include "ListNode.h"
 
 using namespace std;
 
-typedef struct node {
-    int data;
-    struct node *next;
-}node;
-
-void push(struct node **ptr, int val) {
-    node* newptr = new node;
-    newptr->data = val;
-    newptr->next = (*ptr);
-    (*ptr) = newptr;
-}
-
-void display(struct node* ptr) {
-    while(ptr != NULL) {
-        cout<<ptr->data<<"";
-        ptr = ptr->next;
-    }
-    cout<<endl;
-}
-
-node* mergeSortedList(node *l1, node *l2){
-    node *head, *ptr;
-    head = new node;
+ListNode* mergeSortedList(ListNode *l1, ListNode *l2){
+    ListNode *head, *ptr;
+    head = new ListNode(-1);
     ptr = head;
 
-    while(NULL != l1 && NULL != l2){
+    while(l1 && l2){
         if(l1->data < l2->data){
             ptr->next = l1;
             l1 = l1->next;
@@ -38,7 +18,7 @@ node* mergeSortedList(node *l1, node *l2){
         }
         ptr = ptr->next;
     }
-    if(NULL == l1){
+    if(l1){
         ptr->next = l2;
     }
     else{
@@ -49,7 +29,7 @@ node* mergeSortedList(node *l1, node *l2){
 
 int main(){
 
-    node *h1 = NULL, *h2 = NULL;
+    ListNode *h1 = NULL, *h2 = NULL;
     push(&h1,8);
     push(&h1,6);
     push(&h1,3);
@@ -64,7 +44,7 @@ int main(){
     cout<<"List 2 ..."<<endl;
     display(h2);
 
-    node *list = mergeSortedList(h1, h2);
+    ListNode *list = mergeSortedList(h1, h2);
     cout<<"Sorted merged list ..."<<endl;
     display(list);
 
