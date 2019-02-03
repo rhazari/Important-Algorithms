@@ -18,9 +18,7 @@ ListNode* pairWiseSwap(ListNode* head){
         ptr = curr;
         curr = t;
     }
-
     return fake->next;
-
 }
 
 int main()
