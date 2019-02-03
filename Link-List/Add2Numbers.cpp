@@ -1,28 +1,7 @@
 /* Two numbers provided in two Link List 
    Add the two number */
-#include <iostream>
+#include "ListNode.h"
 using namespace std;
-
-class ListNode {
-public:
-    int data;
-    ListNode *next;
-    ListNode(int val): data(val), next(nullptr){}
-};
-
-void push(ListNode** root, int val) {
-    ListNode* ptr = new ListNode(val);
-    ptr->next = (*root);
-    (*root) = ptr;
-}
-
-void printList(ListNode* ptr) {
-    while(ptr) {
-        cout<<ptr->data<<" ";
-        ptr = ptr->next;
-    }
-    cout<<"\n";
-}
 
 ListNode* addNumber(ListNode *h1, ListNode *h2) {
     ListNode *fake = new ListNode(-1);
@@ -64,11 +43,11 @@ int main() {
     push(&h2, 5);
 
     cout<<"List 1"<<endl;
-    printList(h1);
+    display(h1);
 
     cout<<"List 2"<<endl;
-    printList(h2);
+    display(h2);
 
     cout<<"List 1 + List 2"<<endl;
-    printList(addNumber(h1,h2));
+    display(addNumber(h1,h2));
 }

@@ -1,27 +1,6 @@
-#include <iostream>
+#include "ListNode.h"
 
 using namespace std;
-
-class ListNode{
-public:
-    int data;
-    ListNode *next;
-    ListNode(int val): data(val), next(nullptr){}
-};
-
-void push(ListNode **head, int value){
-    ListNode *ptr = new ListNode(value);
-    ptr->next = *head;
-    *head = ptr;
-}
-
-void display(ListNode *root){
-    while(root){
-        cout<<root->data<<" ";
-        root = root->next;
-    }
-    cout<<"\n";
-}
 
 void reverseList(ListNode **root){
     ListNode *ptr, *prev, *temp;

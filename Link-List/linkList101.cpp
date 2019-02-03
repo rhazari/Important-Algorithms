@@ -1,29 +1,9 @@
-#include <iostream>
+#include "ListNode.h"
 
 using namespace std;
 
-typedef struct node{
-    int data;
-    struct node *next;
-}node;
-
-void push(node **head, int value){
-    node *ptr = new node;
-    ptr->data = value;
-    ptr->next = *head;
-    *head = ptr;
-}
-
-void display(node *ptr){
-    while(ptr){
-        cout<<ptr->data<<" ";
-        ptr = ptr->next;
-    }
-    cout<<endl;
-}
-
-node *revList(node *head){
-    node *prev, *ptr, *temp;
+ListNode *revList(ListNode *head){
+    ListNode *prev, *ptr, *temp;
     ptr = head;
     prev = NULL;
     while(ptr){
@@ -35,10 +15,10 @@ node *revList(node *head){
     return prev;
 }
 
-node *delNode(node *head, int value){
-    node *newHead = new node;
+ListNode *delListNode(ListNode *head, int value){
+    ListNode *newHead = new ListNode(-1);
     newHead->next = head;
-    node *ptr, *prev;
+    ListNode *ptr, *prev;
     ptr = newHead;
     while(head){
         if(head->data == value){
@@ -47,14 +27,14 @@ node *delNode(node *head, int value){
         }
         else{
             head = head->next;
-            ptr = ptr->next;    
+            ptr = ptr->next;
         }    
     }
     return newHead->next;
 }
 
 int main(){
-    node *head = NULL;
+    ListNode *head = NULL;
     push(&head,12);
     push(&head,17);
     push(&head,9);
@@ -63,15 +43,15 @@ int main(){
     push(&head,19);
     push(&head,21);
 
-    //Original List
+    cout<<"Original List"<<"\n";
     display(head);
 
-    //Reversed List
-    node *rvList = revList(head);
+    cout<<"Reversed List"<<"\n";
+    ListNode *rvList = revList(head);
     display(rvList);
 
-    //Delete Node
-    node *del = delNode(rvList,12);
+    cout<<"Delete Node of value from List"<<"\n";
+    ListNode *del = delListNode(rvList,12);
     display(del);
 
     return 0;

@@ -1,54 +1,37 @@
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
+#include "ListNode.h"
 
 using namespace std;
 
-typedef struct node {
-    int data;
-    struct node *next;
-}node;
-
-
-void push(struct node** ptr, int val) {
-    node* newptr = (node*)malloc(sizeof(node));
-    newptr->data = val;
-    newptr->next = (*ptr);
-    (*ptr) = newptr;
-}
-
-void printList(struct node* ptr) {
-    while(ptr != NULL) {
-        printf("%d ",ptr->data);
+void removeDuplicates(ListNode **head) {
+    ListNode *ptr;
+    ptr = (*head);
+    while( ptr ){
+        if( ptr->next && ptr->data == ptr->next->data ){
+            ListNode *q = ptr->next;
+            int duplicate = ptr->data;
+            while(q && duplicate == q->data){
+                q = q->next;
+            }
+            if(nullptr == q){
+                ptr->next = nullptr;
+                break;
+            }
+            else{
+                ptr->next = q;
+            }
+        }
         ptr = ptr->next;
     }
-    printf("\n");
 }
 
-void removeDuplicates(struct node **head) {
-    node *prev, *ptr;
-    prev = (*head);
-    ptr = (*head)->next;
-    while( NULL != ptr ){
-        if( prev->data == ptr->data ){
-            prev->next = ptr->next;
-            ptr = ptr->next;
-        }
-        else {
-            prev = prev->next;
-            ptr = ptr->next;
-        }
-    }
-}
-
-struct node* uniqueElements(struct node *head) {
-    node *newHead = new node;
+ListNode* uniqueElements(ListNode *head) {
+    ListNode *newHead = new ListNode(-1);
     newHead->next = head;
-    node *ptr = newHead;
-    while( NULL != ptr->next && NULL != ptr->next->next ){
+    ListNode *ptr = newHead;
+    while( ptr->next && ptr->next->next ){
         if( ptr->next->data == ptr->next->next->data ) {
             int duplicate = ptr->next->data;
-            while( NULL != ptr->next && duplicate == ptr->next->data ) {
+            while( ptr->next && duplicate == ptr->next->data ) {
                 ptr->next = ptr->next->next;
             }
         }
@@ -60,7 +43,7 @@ struct node* uniqueElements(struct node *head) {
 }
 
 int main(){
-    node *h1 = NULL;
+    ListNode *h1 = nullptr;
     push(&h1,9);
     push(&h1,9);
     push(&h1,7);
@@ -76,14 +59,28 @@ int main(){
     push(&h1,1);
 
     cout<<"Original Link List"<<endl;
-    printList(h1);
+    display(h1);
 
-    node *temp = uniqueElements(h1);
+    ListNode *temp = uniqueElements(h1);
     cout<<"The unique elements of the link list"<<endl; 
-    printList(temp);
+    display(temp);
+
+    ListNode *h2 = nullptr;
+    push(&h2,9);
+    push(&h2,9);
+    push(&h2,7);
+    push(&h2,6);
+    push(&h2,5);
+    push(&h2,5);
+    push(&h2,5);
+    push(&h2,4);
+    push(&h2,3);
+    push(&h2,3);
+    push(&h2,2);
+    push(&h2,1);
+    push(&h2,1);
 
     cout<<"Link List after removing duplicates"<<endl;
-    removeDuplicates(&h1);
-    printList(h1);
-    return 0;
+    removeDuplicates(&h2);
+    display(h2);
 }
