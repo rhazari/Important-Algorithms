@@ -1,29 +1,15 @@
-#include <iostream>
+#include "TreeNode.h"
 #include <map>
 #include <queue>
 
 using namespace std;
-
-class TreeNode
-{
-public:
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode(int _val){
-        val = _val;
-        left = nullptr;
-        right = nullptr;
-    }
-};
 
 void createBST(TreeNode **root, int num){
     if(!(*root)){
         TreeNode* newNode = new TreeNode(num);
         *root = newNode;
     }
-    else if((*root)->val < num)
+    else if((*root)->data < num)
         createBST(&(*root)->right, num);
     else
         createBST(&(*root)->left, num);
@@ -42,7 +28,7 @@ void verticalOrder(TreeNode *root){
         TreeNode *node = temp.first;
         int level = temp.second;
 
-        myMap[level].push_back(node->val);
+        myMap[level].push_back(node->data);
         if(node->left)
             Q.push(make_pair(node->left, level-1));
         if(node->right)
@@ -59,14 +45,13 @@ void verticalOrder(TreeNode *root){
 void preOrder(TreeNode *root){
     if(!root)
         return;
-    cout<<root->val<<" ";
+    cout<<root->data<<" ";
     preOrder(root->left);
     preOrder(root->right);
 }
 
 int main(){
-
-    TreeNode *tree;
+    TreeNode *tree = nullptr;
     createBST(&tree, 6);
     createBST(&tree, 11);
     createBST(&tree, 7);
@@ -76,15 +61,13 @@ int main(){
     createBST(&tree, 8);
     createBST(&tree, 13);
 
-    cout<<"Pre Order Traversal"<<endl;
+    cout<<"Pre Order Traversal"<<"\n";
     preOrder(tree);
     cout<<endl;
 
-    cout<<"Vertical Order Traversal"<<endl;
+    cout<<"Vertical Order Traversal"<<"\n";
     verticalOrder(tree);
     cout<<endl;
-
-    return 0;
 }
 
 

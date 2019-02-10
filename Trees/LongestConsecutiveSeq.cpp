@@ -1,37 +1,21 @@
 // Given a binary tree, find the length of the longest consecutive sequence path.
-#include <iostream>
+#include "TreeNode.h"
 #include <algorithm>
 #include <vector>
 
 using namespace std;
 
-class TreeNode{
-public:
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x): val(x), left(nullptr), right(nullptr){}
-};
-
-void inOrder(TreeNode *root ) {
-    if(!root)
-        return;
-    inOrder(root->left);
-    cout<<root->val<<" ";
-    inOrder(root->right);
-}
-
-void insert(TreeNode **root, int value) {
+void insert(TreeNode **root, int data) {
     if ( !(*root) ){
-        TreeNode *temp = new TreeNode(value);
+        TreeNode *temp = new TreeNode(data);
         (*root) = temp;
     }
     else {
-        if( (*root)->val > value ) {
-            insert(&((*root)->left), value);
+        if( (*root)->data > data ) {
+            insert(&((*root)->left), data);
         }
-        else if ( (*root)->val < value ) {
-            insert(&((*root)->right), value);
+        else if ( (*root)->data < data ) {
+            insert(&((*root)->right), data);
         }
     }
 }
@@ -39,13 +23,13 @@ void insert(TreeNode **root, int value) {
 void dfs(TreeNode* root, int len, int& result){
     result = max(len, result);
     if(root->left){
-        if(root->left->val == root->val+1)
+        if(root->left->data == root->data+1)
             dfs(root->left, len+1, result);
         else
             dfs(root->left, 1, result);
     }
     if(root->right){
-        if(root->right->val == root->val+1)
+        if(root->right->data == root->data+1)
             dfs(root->right, len+1, result);
         else
             dfs(root->right, 1, result);
@@ -60,10 +44,7 @@ int longestConsecutiveSequence(TreeNode * root){
     return result;
 }
 
-
-
 int main(){
-
     TreeNode *tree = nullptr;
     insert(&tree, 6);
     insert(&tree, 11);

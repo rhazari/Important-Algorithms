@@ -1,19 +1,9 @@
 // Given a binary tree, find the largest subtree which is a Binary Search Tree (BST)
 // Largest means the subtree with the largest number of nodes.
-#include <iostream>
+#include "TreeNode.h"
 #include <climits>
 
 using namespace std;
-
-class TreeNode{
-public:
-    int m_data;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode(int data):
-        m_data(data), left(nullptr), right(nullptr){}
-};
 
 class Info{
 public:
@@ -21,7 +11,7 @@ public:
     int max;    // Min value in subtree
     int min;    // Max value in subtree
     int ans;    // Size of the largest BST
-    bool isBST; //  If subree is BST
+    bool isBST; // If subree is BST
 };
 
 Info largestBST(TreeNode *root){
@@ -29,7 +19,7 @@ Info largestBST(TreeNode *root){
         return {0, INT_MIN, INT_MAX, 0, true};
     
     if(!root->left && !root->right)
-        return {1, root->m_data, root->m_data, 1, true};
+        return {1, root->data, root->data, 1, true};
 
     Info left = largestBST(root->left);
     Info right = largestBST(root->right);
@@ -38,11 +28,11 @@ Info largestBST(TreeNode *root){
     result.sz = 1 + left.sz + right.sz;
 
     if(left.isBST && right.isBST && 
-        left.max < root->m_data && 
-        right.min > root->m_data){
+        left.max < root->data && 
+        right.min > root->data){
         
-        result.min = min(left.min, min(right.min, root->m_data));
-        result.max = max(right.max, max(left.max, root->m_data));
+        result.min = min(left.min, min(right.min, root->data));
+        result.max = max(right.max, max(left.max, root->data));
 
         result.ans = result.sz;
         result.isBST = true;

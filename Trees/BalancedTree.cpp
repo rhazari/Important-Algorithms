@@ -1,28 +1,19 @@
 //Program to check if a binary tree is balanced or not
-#include <iostream>
+#include "TreeNode.h"
 
 using namespace std;
-
-class TreeNode{
-public:
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x): val(x), left(nullptr), right(nullptr){}
-};
 
 int contains(TreeNode* root, int num) {
     if(!root)
         return 0;
-    while(root)
-    {
-        if(root->val ==  num) {
+    while(root) {
+        if(root->data ==  num) {
             return 1;
         }
-        else if(root->val > num) {
+        else if(root->data > num) {
             root = root->left;
         }
-        else if(root->val < num) {
+        else if(root->data < num) {
             root = root->right;
         }
     }
@@ -39,9 +30,8 @@ int insert(TreeNode* root, int num) {
         return 0;
     }
     else {
-        while(curr)
-        {
-            if(curr->val > num) {
+        while(curr) {
+            if(curr->data > num) {
                 prev = curr;
                 curr = curr->left;
             }
@@ -52,7 +42,7 @@ int insert(TreeNode* root, int num) {
         }
     }    
     if(!curr) {
-        if(prev->val > num)
+        if(prev->data > num)
         {
             prev->left = ptr;
             return 1;
@@ -68,7 +58,7 @@ int insert(TreeNode* root, int num) {
 void inorder(TreeNode* ptr) {
     if(ptr) {
         inorder(ptr->left);
-        cout<<ptr->val<<" ";
+        cout<<ptr->data<<" ";
         inorder(ptr->right);
     }
 }
@@ -117,9 +107,7 @@ int main() {
     cout<<"\n";
     
     if(isBalanced(root))
-        cout <<"The tree is a balanced BST"<<"\n";
+        cout <<"The tree is a balanced BST \n";
     else
-        cout <<"The tree is not a balanced BST"<<"\n";
-
-    return 0;
+        cout <<"The tree is not a balanced BST \n";
 }

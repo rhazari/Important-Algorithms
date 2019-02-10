@@ -1,34 +1,18 @@
-#include <iostream>
+#include "TreeNode.h"
 
 using namespace std;
 
-class TreeNode{
-public:
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x): val(x), left(nullptr), right(nullptr){}
-};
-
-void inOrder(TreeNode *root ) {
-    if(!root)
-        return;
-    inOrder(root->left);
-    cout<<root->val<<" ";
-    inOrder(root->right);
-}
-
-void insert(TreeNode **root, int value) {
+void insert(TreeNode **root, int data) {
     if ( !(*root) ){
-        TreeNode *temp = new TreeNode(value);
+        TreeNode *temp = new TreeNode(data);
         (*root) = temp;
     }
     else {
-        if( (*root)->val > value ) {
-            insert(&((*root)->left), value);
+        if( (*root)->data > data ) {
+            insert(&((*root)->left), data);
         }
-        else if ( (*root)->val < value ) {
-            insert(&((*root)->right), value);
+        else if ( (*root)->data < data ) {
+            insert(&((*root)->right), data);
         }
     }
 }
@@ -40,7 +24,7 @@ int main() {
     cin >> N;
 
     while(N) {
-        cout<<"Enter a value"<<endl;
+        cout<<"Enter a data"<<endl;
         cin >> tmp;
         insert(&root, tmp);
         --N;
@@ -48,6 +32,4 @@ int main() {
     cout<<"\nIn-Order traversal after BST insertion"<<"\n";
     inOrder(root);
     cout<<"\n";
-
-    return 0;
 }

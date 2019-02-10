@@ -1,16 +1,8 @@
-#include <iostream>
+#include "TreeNode.h"
 #include <cstdlib>
 #include <vector>
 
 using namespace std;
-
-class TreeNode{
-public:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int val): data(val), left(nullptr), right(nullptr){}
-};
 
 TreeNode* createBST(vector<int> array, int left, int right) {
     if(left < right) {

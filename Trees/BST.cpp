@@ -1,16 +1,9 @@
 //Program for generating a Binary Search Tree
 //Also outputs the in-order, pre-order & post-order traversal of the BST
 
-#include <iostream>
+#include "TreeNode.h"
 
 using namespace std;
-
-struct TreeNode{
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int x): val(x), left(nullptr), right(nullptr){}
-};
 
 int contains(TreeNode* root, int num) {
     TreeNode* ptr = root;
@@ -20,13 +13,13 @@ int contains(TreeNode* root, int num) {
     }
     
     while(nullptr != ptr){
-        if(ptr->val ==  num) {
+        if(ptr->data ==  num) {
             return true;
         }
-        else if(ptr->val > num) {
+        else if(ptr->data > num) {
             ptr = ptr->left;
         }
-        else if(ptr->val < num) {
+        else if(ptr->data < num) {
             ptr = ptr->right;
         }
     }
@@ -45,7 +38,7 @@ bool insert(TreeNode* root, int num) {
     }
     else {
         while(nullptr != curr) {
-            if(curr->val > num) {
+            if(curr->data > num) {
                 prev = curr;
                 curr = curr->left;
             }
@@ -57,7 +50,7 @@ bool insert(TreeNode* root, int num) {
     }
     
     if(nullptr == curr) {
-        if(prev->val > num) {
+        if(prev->data > num) {
             prev->left = ptr;
             return true;
         }
@@ -72,14 +65,14 @@ bool insert(TreeNode* root, int num) {
 void inorder(TreeNode* ptr) {
     if(nullptr != ptr) {
         inorder(ptr->left);
-        cout<<ptr->val<<" ";
+        cout<<ptr->data<<" ";
         inorder(ptr->right);
     }
 }
 
 void preorder(TreeNode* ptr) {
     if(nullptr != ptr) {
-        cout << ptr->val<<" ";
+        cout << ptr->data<<" ";
         preorder(ptr->left);
         preorder(ptr->right);
     }
@@ -89,7 +82,7 @@ void postorder(TreeNode* ptr) {
     if(nullptr != ptr) {
         postorder(ptr->left);
         postorder(ptr->right);
-        cout << ptr->val <<" "; 
+        cout << ptr->data <<" "; 
     }
 }
 
@@ -99,7 +92,7 @@ int main() {
     int read = 5;
     int x;
     while(read) {
-        cout<<"Enter a value into the BST\n";
+        cout<<"Enter a dataue into the BST\n";
         cin >> x;
         if(insert(root, x)){
             read--;

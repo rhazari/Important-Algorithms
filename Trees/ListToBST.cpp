@@ -1,5 +1,5 @@
 // Convert a sorted list to a BST
-#include <iostream>
+#include "TreeNode.h"
 #include <cstdlib>
 
 using namespace std;
@@ -11,14 +11,6 @@ public:
     ListNode(int val): data(val), next(nullptr){}
 };
 
-class TreeNode{
-public:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int val): data(val), left(nullptr), right(nullptr){}
-};
-
 void push(ListNode **head, int value){
     ListNode *newptr = new ListNode(value);
     newptr->next = *head;
@@ -27,10 +19,9 @@ void push(ListNode **head, int value){
 
 void display(ListNode *head){
     while(head){
-        cout <<head->data<<" ";
+        cout<<head->data<<" ";
         head = head->next;
     }
-    cout<<"\n";
 }
 
 TreeNode* createBST(ListNode **head, int start, int end)
@@ -47,14 +38,6 @@ TreeNode* createBST(ListNode **head, int start, int end)
     root->right = createBST(head,mid+1,end);
     
     return root;
-}
-
-void inorder(TreeNode* root){
-    if(root){
-        inorder(root->left);
-        cout <<root->data<<" ";
-        inorder(root->right);
-    }
 }
 
 int main(){
@@ -75,7 +58,7 @@ int main(){
     
     auto *root = createBST(&head,0,8);
     cout<<"In-order display of BST"<<endl;
-    inorder(root);
+    inOrder(root);
     cout <<endl;
     return 0;
 }

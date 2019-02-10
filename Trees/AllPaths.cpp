@@ -1,16 +1,8 @@
-#include <iostream>
+#include "TreeNode.h"
 #include <vector>
 #include <algorithm>
 
 using namespace std;
-
-class TreeNode{
-public:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int val): data(val), left(nullptr), right(nullptr){}
-};
 
 void createTree(TreeNode **root, vector<int> array, int left, int right){
     if(left > right){
@@ -21,16 +13,6 @@ void createTree(TreeNode **root, vector<int> array, int left, int right){
     (*root) = p;
     createTree(&(*root)->left, array, left, mid-1);
     createTree(&(*root)->right, array, mid+1, right);
-}
-
-void displayTree(TreeNode* root){
-    if(root->left){
-        displayTree(root->left);
-    }
-    cout<<root->data<<" ";
-    if(root->right){
-        displayTree(root->right);
-    }
 }
 
 void dfsBtree(TreeNode* root, vector<vector<int>> &result, vector<int>& vec){
@@ -72,6 +54,4 @@ int main(){
         }
         cout<<"\n";
     }
-
-    return 0;
 }

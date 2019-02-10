@@ -1,29 +1,15 @@
-#include <iostream>
+#include "TreeNode.h"
 #include <algorithm>
 #include <vector>
 
 using namespace std;
-
-class TreeNode
-{
-public:
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode(int _val){
-        val = _val;
-        left = nullptr;
-        right = nullptr;
-    }
-};
 
 void createBST(TreeNode **root, int num){
     if(!(*root)){
         TreeNode* newNode = new TreeNode(num);
         *root = newNode;
     }
-    else if((*root)->val < num)
+    else if((*root)->data < num)
         createBST(&(*root)->right, num);
     else
         createBST(&(*root)->left, num);
@@ -32,7 +18,7 @@ void createBST(TreeNode **root, int num){
 void preOrder(TreeNode *root){
     if(!root)
         return;
-    cout<<root->val<<" ";
+    cout<<root->data<<" ";
     preOrder(root->left);
     preOrder(root->right);
 }
@@ -46,7 +32,7 @@ int helper(vector<vector<int>> &vec, TreeNode* root){
 
     if(curr >= vec.size())
         vec.resize(curr+1);
-    vec[curr].push_back(root->val);
+    vec[curr].push_back(root->data);
     return curr;
 }
 
@@ -78,6 +64,4 @@ int main(){
             cout<<elem<<" ";
         cout<<endl;
     }
-
-    return 0;
 }

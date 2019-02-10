@@ -6,21 +6,13 @@
     4. Level Order bottom-up traversal
 */
 
-#include <iostream>
+#include "TreeNode.h"
 #include <vector>
 #include <stack>
 #include <queue>
 #include <algorithm>
 
 using namespace std;
-
-class TreeNode{
-public:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode(int val): data(val), left(nullptr), right(nullptr){}
-};
 
 void insert(TreeNode **root, int value) {
     if (nullptr == (*root) ){
